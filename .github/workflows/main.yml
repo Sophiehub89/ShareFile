@@ -1,23 +1,29 @@
-name: Deploy to InfinityFree
+name: FTP Deploy
 
 on:
   push:
     branches:
-      - main  # Change to your default branch if necessary
+      - main  # Adjust if your default branch is different
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Deploy to InfinityFree
-      uses: SamKirkland/FTP-Deploy-Action@4.1.0
-      with:
-        server: ftpupload.net  # Your InfinityFree FTP server
-        username: ${{ secrets.INFINITYFREE_USERNAME }}  # Reference your FTP username secret
-        password: ${{ secrets.INFINITYFREE_PASSWORD }}  # Reference your FTP password secret
-        local-dir: ./  # Path to the directory containing your site files (note the trailing slash)
-        server-dir: /htdocs/  # Change if your public directory is different (also note the trailing slash)
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build  # Adjust to your build command if needed
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: ftpupload.net  # Replace with your FTP server address
+          username: ${{ secrets.FTP_USERNAME }}  # Use GitHub Secrets for security
+          password: ${{ secrets.FTP_PASSWORD }}  # Use GitHub Secrets for security
+          local-dir: ./dist  # Change to where your build output is located
+          server-dir: /htdocs  # Your web root directory
