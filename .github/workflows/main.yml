@@ -17,7 +17,7 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@4.1.0
       with:
         server: ftpupload.net  # Your InfinityFree FTP server
-        username: ${{ secrets.INFINITYFREE_USERNAME }}
-        password: ${{ secrets.INFINITYFREE_PASSWORD }}
-        local-dir: .  # Path to the directory containing your site files
-        server-dir: /htdocs  # Change if your public directory is different
+        username: ${{ secrets.INFINITYFREE_USERNAME }}  # Reference your FTP username secret
+        password: ${{ secrets.INFINITYFREE_PASSWORD }}  # Reference your FTP password secret
+        local-dir: ./  # Path to the directory containing your site files (note the trailing slash)
+        server-dir: /htdocs/  # Change if your public directory is different (also note the trailing slash)
