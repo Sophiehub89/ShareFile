@@ -25,5 +25,5 @@ jobs:
           server: ftpupload.net  # Replace with your FTP server address
           username: ${{ secrets.FTP_USERNAME }}  # Use GitHub Secrets for security
           password: ${{ secrets.FTP_PASSWORD }}  # Use GitHub Secrets for security
-          local-dir: ./dist  # Change to where your build output is located
+          local-dir: ./dist/  # Change to where your build output is located
           server-dir: /htdocs  # Your web root directory
